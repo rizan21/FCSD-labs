@@ -1,8 +1,0 @@
-CHIP And3 {
-
-    IN a[3];
-    OUT out;
-    PARTS:
-    And(a=a[0],b=a[1],out=o0);
-    And(a=o0, b=a[2], out=out);
-}

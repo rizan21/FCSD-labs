@@ -1,8 +1,0 @@
-CHIP Or5
-{
-	IN a,b,c,d,e;
-	OUT out;
-	PARTS:
-	Or4(a=a,b=b,c=c,d=d,out=p1);
-	Or(a=p1,b=e,out=out);
-}

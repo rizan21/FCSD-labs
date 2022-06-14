@@ -1,9 +1,0 @@
-CHIP Or8
-{
-	IN a, b, c, d, e, f, g, h;
-	OUT out;
-
-	PARTS:
-		Or5(a = a, b = b, c = c, d = d, e = e, out = temp);
-		Or4(a = temp, b = f, c = g, d = h, out = out);
-}

@@ -1,8 +1,0 @@
-CHIP Or3 {
-
-    IN a[3];
-    OUT out;
-    PARTS:
-    Or(a=a[0], b=a[1], out=o0);
-    Or(a=o0, b=a[2], out=out);
-}

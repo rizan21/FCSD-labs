@@ -1,8 +1,0 @@
-CHIP And5
-{
-	IN a,b,c,d,e;
-	OUT out;
-	PARTS:
-	And4(a=a,b=b,c=c,d=d,out=p1);
-	And(a=p1,b=e,out=out);
-}
