@@ -1,0 +1,15 @@
+CHIP Inputs8bit
+{
+	IN Y[8], S;
+	OUT newY[8];
+
+	PARTS:
+		Xor(a = Y[0], b = S, out = newY[0]);
+		Xor(a = Y[1], b = S, out = newY[1]);
+		Xor(a = Y[2], b = S, out = newY[2]);
+		Xor(a = Y[3], b = S, out = newY[3]);
+		Xor(a = Y[4], b = S, out = newY[4]);
+		Xor(a = Y[5], b = S, out = newY[5]);
+		Xor(a = Y[6], b = S, out = newY[6]);
+		Xor(a = Y[7], b = S, out = newY[7]);
+}

@@ -1,0 +1,20 @@
+/*
+	CLA 8-bit adder and 9th bit as overflow 
+*/
+CHIP CLA8Bit {
+IN x[8], y[8], c0, sign;
+OUT out[8], of;
+
+PARTS:
+CLA4Bit(x=x[0..3], y=y[0..3], ci=c0, out=out[0..3], cf=c4);
+CLA4Bitv2(x=x[4..7], y=y[4..7], ci=c4, out=out[4..7], cf=c8, cpf=c7);
+
+Not(in=sign, out=unsign);
+
+Xor(a=c7, b=c8, out=of1);
+And(a=of1, b=sign, out=out1);
+
+And(a=c8, b=unsign, out=out2);
+
+Or(a=out1, b=out2, out=of);
+}

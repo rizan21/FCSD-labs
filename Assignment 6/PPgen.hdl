@@ -1,0 +1,17 @@
+/*
+	Partial Product generator for 8-bit unsigned integer multiplication
+*/
+CHIP PPgen
+{
+	IN x[8],y[8];
+	OUT PP0[16],PP1[16],PP2[16],PP3[16],PP4[16],PP5[16],PP6[16],PP7[16];
+	PARTS:
+	PPcalc(x=x,y=y[0],out=PP0[0..7]);		// PP0
+	PPcalc(x=x,y=y[1],out=PP1[1..8]);		// PP1
+	PPcalc(x=x,y=y[2],out=PP2[2..9]);		// PP2
+	PPcalc(x=x,y=y[3],out=PP3[3..10]);		// PP3
+	PPcalc(x=x,y=y[4],out=PP4[4..11]);		// PP4
+	PPcalc(x=x,y=y[5],out=PP5[5..12]);		// PP5
+	PPcalc(x=x,y=y[6],out=PP6[6..13]);		// PP6
+	PPcalc(x=x,y=y[7],out=PP7[7..14]);		// PP7
+}

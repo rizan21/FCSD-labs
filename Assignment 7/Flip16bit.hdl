@@ -1,0 +1,26 @@
+/*
+	1's complement of 16-Bit
+	Delay : 1t
+*/
+CHIP Flip16bit
+{
+	IN a[16],s;
+	OUT na[16];
+	PARTS:
+	Xor(a=a[0],b=s,out=na[0]);
+	Xor(a=a[1],b=s,out=na[1]);
+	Xor(a=a[2],b=s,out=na[2]);
+	Xor(a=a[3],b=s,out=na[3]);
+	Xor(a=a[4],b=s,out=na[4]);
+	Xor(a=a[5],b=s,out=na[5]);
+	Xor(a=a[6],b=s,out=na[6]);
+	Xor(a=a[7],b=s,out=na[7]);
+	Xor(a=a[8],b=s,out=na[8]);
+	Xor(a=a[9],b=s,out=na[9]);
+	Xor(a=a[11],b=s,out=na[11]);
+	Xor(a=a[12],b=s,out=na[12]);
+	Xor(a=a[13],b=s,out=na[13]);
+	Xor(a=a[10],b=s,out=na[10]);
+	Xor(a=a[14],b=s,out=na[14]);
+	Xor(a=a[15],b=s,out=na[15]);
+}

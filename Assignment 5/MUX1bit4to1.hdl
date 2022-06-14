@@ -1,0 +1,21 @@
+//1-bit 4-to-1 line MUX
+
+CHIP MUX1bit4to1
+{
+	IN a, b, c, d, S[2];
+	OUT out;
+
+	PARTS:
+		Not(in = S[0], out = notS0);
+		Not(in = S[1], out = notS1);
+		And(a = notS1, b = notS0, out = m0);
+		And(a = notS1, b = S[0], out = m1);
+		And(a = S[1], b = notS0, out = m2);
+		And(a = S[1], b = S[0], out = m3); //Minterms calculated, for usage in result calculation
+
+		And(a = m0, b = a, out = t0);
+		And(a = m1, b = b, out = t1);
+		And(a = m2, b = c, out = t2);
+		And(a = m3, b = d, out = t3);
+		Or4(a = t0, b = t1, c = t2, d = t3, out = out);
+}

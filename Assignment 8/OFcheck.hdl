@@ -1,0 +1,15 @@
+CHIP OFcheck
+{
+	IN c1,c0,signed,sub;
+	OUT OF;
+	PARTS:
+	Not(in=sub,out=add);
+	Not(in=signed,out=unsigned);
+
+	And3(a[0]=unsigned,a[1]=add,a[2]=c1,out=p1);		// Unsigned addition OF
+
+	Xor(a=c1,b=c0,out=a1);
+	And(a=signed,b=a1,out=p2);			// Signed addition/subtraction OF
+
+	Or(a=p1,b=p2,out=OF);
+}

@@ -1,0 +1,13 @@
+/*This a parity bit checker chip.
+This use the builtin XOR and the already 
+built parity bit generator to 
+check the transmitted parity bit. */
+
+CHIP Q5b {
+IN x7, x6, x5, x4, x3, x2, x1, x0, p;
+OUT check;
+
+PARTS:
+Q5a(x7=x7, x6=x6, x5=x5, x4=x4, x3=x3, x2=x2, x1=x1, x0=x0, p-bit=checkp);
+Xor(a=checkp, b=p, out=check);
+}

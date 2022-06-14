@@ -1,0 +1,20 @@
+//8-bit Wallace Tree multiplier for signed integers
+
+CHIP MultiplierS8
+{
+	IN X[8], Y[8];
+	OUT Z[8], OF;
+
+	PARTS:
+		InputsS(X = X, Y = Y, PP0 = PP0, PP1 = PP1, PP2 = PP2, PP3 = PP3, PP4 = PP4, PP5 =  PP5, PP6 = PP6, PP7 = PP7, CB = CB); //Takes multiplicand and mutliplier operands and generates 16-bit partial products (PP7 is 1's complement version, and carry bit 1 is also generated)
+
+		MultiS(PP0 = PP0, PP1 = PP1, PP2 = PP2, PP3 = PP3, PP4 = PP4, PP5 =  PP5, PP6 = PP6, PP7 = PP7, CB = CB, P = Ztemp); //Generates 16-bit product term from the partial products
+
+		OutputsS(in = Ztemp, out = Z, OFs = OFs, OFo = OFo); //Generates resultant 8-bit product and overflow bits for same sign and opposite sign multiplication from the 16-bit product
+
+		Xor(a = X[7], b = Y[7], out = xorxy);
+		Not(in = xorxy, out = eqxy);
+		And(a = eqxy, b = OFs, out = t1);
+		And(a = xorxy, b = OFo, out = t2);
+		Or(a = t1, b = t2, out = OF); //Resultant overflow bit
+}

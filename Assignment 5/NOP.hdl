@@ -1,0 +1,20 @@
+//Returns 00000000, irrespective of inputs
+
+CHIP NOP
+{
+	IN X[8], Y[8];
+	OUT out[8];
+
+	PARTS:
+		Not(in = X[0], out = notX);
+		Or(a = X[0], b = notX, out = set1); //set1 is a constant 1
+
+		Not(in = set1, out = out[0]);
+		Not(in = set1, out = out[1]);
+		Not(in = set1, out = out[2]);
+		Not(in = set1, out = out[3]);
+		Not(in = set1, out = out[4]);
+		Not(in = set1, out = out[5]);
+		Not(in = set1, out = out[6]);
+		Not(in = set1, out = out[7]); //not applied on set1 sets all values to 0
+}

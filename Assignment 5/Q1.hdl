@@ -1,0 +1,34 @@
+//ALU for 8-bit integers, with support for bitwise AND, OR, XOR, and addition, subtraction and multiplication for signed and unsigned integers.
+//S is sign control bit, with S = 0 for unsigned and S = 1 for signed.
+//Opcode is control variable for operations, 000 for NOP (no operation), 001 for bitwise AND, 010 for bitwise OR, 011 for bitwise XOR, 100 for addition, 101 for subtraction, 110 for unsigned multiplication, and 111 for signed multiplication.
+
+CHIP Q1
+{
+	IN X[8], Y[8], S, Opcode[3];
+	OUT Z[8], OF, EQ;
+
+	PARTS:
+		NOP(X = X, Y = Y, out = Z0); //NOP
+
+		And8bit(a = X, b = Y, out = Z1); //bitwise AND
+		Or8bit(a = X, b = Y, out = Z2); //bitwise OR
+		Xor8bit(a = X, b = Y, out = Z3); //bitwise XOR
+
+		Not(in = S, out = notS);
+		Or(a = S, b = notS, out = set1);
+
+		AddSub(X = X, Y = Y, u = notS, Z = Z4, OF = OF0); //addition
+		AddSub(X = X, Y = Y, S = set1, u = notS, Z = Z5, OF = OF1); //subtraction (both use same chip, here, input chip S is for controlling addition/subtraction, u is for unsigned/signed control)
+
+		MultiplierUS8(X = X, Y = Y, Z = Z6, OF = OF2); //unsigned multiplication
+		MultiplierS8(X = X, Y = Y, Z = Z7, OF = OF3); //signed multiplication
+
+		MUX8bit4to1(a = Z0, b = Z1, c = Z2, d = Z3, S = Opcode[0..1], out = out0);
+		MUX8bit4to1(a = Z4, b = Z5, c = Z6, d = Z7, S = Opcode[0..1], out = out1);
+		MUX8bit2to1(a = out0, b = out1, S = Opcode[2], out = Z); //usage of MUX to choose required result using bits from Opcode as control signals
+
+		MUX1bit4to1(a = OF0, b = OF1, c = OF2, d = OF3, S = Opcode[0..1], out = OFtemp);
+		MUX1bit2to1(b = OFtemp, S = Opcode[2], out = OF); //MUX for overflow bit
+
+		EQGen(X = X, Y = Y, out = EQ); //Equality bit
+}

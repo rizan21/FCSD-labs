@@ -1,0 +1,13 @@
+/*
+	4-to-2 bit encoder
+*/
+
+CHIP Q2 {
+	IN X0,X1,X2,X3;
+	OUT Y1,Y0;
+	PARTS:
+	Or(a=X0, b=X1, out=p1);		// X0+X1
+	Or(a=X0, b=X2, out=p2);		// X0+X2
+	Not(in=p1, out=Y1);		// Y1=X0'X1'
+	Not(in=p2, out=Y0);		// Y0=X0'X2'
+}

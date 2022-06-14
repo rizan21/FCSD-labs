@@ -1,0 +1,11 @@
+//16-bit Ripple Carry Adder/Subtractor
+
+CHIP Q1
+{
+	IN X[16], Y[16], S, u; //S is subtractor bit, takes value 1 if subtraction to be done and 0 if addition. u is unsigned bit, takes value 1 if unsigned arithmetic done, and 0 if signed
+	OUT Z[16], OF;
+
+	PARTS:
+		Inputs(Y = Y, S = S, newY = newY); //Prepares inputs for subtraction
+		RCA16(X = X, Y = newY, c0 = S, u = u, Z = Z, OF = OF);
+}

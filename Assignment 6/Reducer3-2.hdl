@@ -1,0 +1,26 @@
+/*
+	3-to-2 reducer (CSA)
+	** Bit wise addition and carry save **
+*/
+CHIP Reducer3-2
+{
+	IN a1[16],a2[16],a3[16];
+	OUT s[16],c[16];
+	PARTS:
+	FA(a=a1[0],b=a2[0],c=a3[0],s=s[0],ca=c[1]);
+	FA(a=a1[1],b=a2[1],c=a3[1],s=s[1],ca=c[2]);
+	FA(a=a1[2],b=a2[2],c=a3[2],s=s[2],ca=c[3]);
+	FA(a=a1[3],b=a2[3],c=a3[3],s=s[3],ca=c[4]);
+	FA(a=a1[4],b=a2[4],c=a3[4],s=s[4],ca=c[5]);
+	FA(a=a1[5],b=a2[5],c=a3[5],s=s[5],ca=c[6]);
+	FA(a=a1[6],b=a2[6],c=a3[6],s=s[6],ca=c[7]);
+	FA(a=a1[7],b=a2[7],c=a3[7],s=s[7],ca=c[8]);
+	FA(a=a1[8],b=a2[8],c=a3[8],s=s[8],ca=c[9]);
+	FA(a=a1[9],b=a2[9],c=a3[9],s=s[9],ca=c[10]);
+	FA(a=a1[10],b=a2[10],c=a3[10],s=s[10],ca=c[11]);
+	FA(a=a1[11],b=a2[11],c=a3[11],s=s[11],ca=c[12]);
+	FA(a=a1[12],b=a2[12],c=a3[12],s=s[12],ca=c[13]);
+	FA(a=a1[13],b=a2[13],c=a3[13],s=s[13],ca=c[14]);
+	FA(a=a1[14],b=a2[14],c=a3[14],s=s[14],ca=c[15]);
+	FA(a=a1[15],b=a2[15],c=a3[15],s=s[15],ca=d);
+}	

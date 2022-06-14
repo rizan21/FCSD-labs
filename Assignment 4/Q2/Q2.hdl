@@ -1,0 +1,24 @@
+/*
+	8-Bit Signed integers multiplication
+	Delay : 17t
+*/
+CHIP Q2
+{
+	IN x[8],y[8];
+	OUT z[8],OF;
+	PARTS:
+	Not(in=x[0],out=nx);
+	And(a=x[0],b=nx,out=zero);													// 0
+	Or(a=x[0],b=nx,out=one);													// 1
+	PPgen(x=x,y=y,PP0=p0,PP1=p1,PP2=p2,PP3=p3,PP4=p4,PP5=p5,PP6=p6,PP7=p7);		// Partial products created
+	Flip16bit(y=p7,s=one,noty=np7);												// 1's complement of PP7
+	Reducer3-2(a1=p0,a2=p1,a3=p2,s=s10,c=c10);									// Lvl 1 reduction part0
+	Reducer3-2(a1=p3,a2=p4,a3=p5,s=s11,c=c11);									// Lvl 1 reduction part1
+	Reducer3-2(a1=p6,a2=np7,a3[0]=one,s=s12,c=c12);								// Lvl 1 reduction part2
+	Reducer3-2(a1=c10,a2=s10,a3=c11,s=s20,c=c20);								// Lvl 2 reduction part0
+	Reducer3-2(a1=s11,a2=c12,a3=s12,s=s21,c=c21);								// Lvl 2 reduction part1
+	Reducer3-2(a1=c20,a2=s20,a3=c21,s=s30,c=c30);								// Lvl 3 reduction part0
+	Reducer3-2(a1=c30,a2=s30,a3=s21,s=s40,c=c40);								// Lvl 4 reduction part0
+	CLA16hot(x=c40,y=s40,s=zero,z=pro);											// Final 2 16bit addition
+	OFcheck(p=pro,x=x[7],y=y[7],z=z,OF=OF);										// OF check and output generation
+}

@@ -1,0 +1,9 @@
+CHIP Adder16
+{
+	IN x[16],y[16],sub,signed;
+	OUT sum[16],OF;
+	PARTS:
+	Flip16bit(a=y,s=sub,na=w);
+	HOPGT(a=x,b=w,c0=sub,c4=c4,c8=c8,c12=c12,c16=c16);
+	CLA16(signed=signed,a=x,b=w,c0=sub,c4=c4,c8=c8,c12=c12,c16=c16,sum=sum,OF=OF);
+}

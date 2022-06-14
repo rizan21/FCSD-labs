@@ -1,0 +1,13 @@
+/*
+	16-Bit Adder using 4-Bit CLA's and higher order terms
+	Delay : 8t
+*/
+CHIP CLA16hot
+{
+	IN x[16],y[16],s;
+	OUT z[16];
+	PARTS:
+	Flip16bit(y=y,s=s,noty=w);
+	HOPGT(a=x,b=w,c0=s,c4=c4,c8=c8,c12=c12,c16=c16);
+	CLA16(a=x,b=w,c0=s,c4=c4,c8=c8,c12=c12,c16=c16,sum=z);
+}

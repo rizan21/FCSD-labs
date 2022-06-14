@@ -1,0 +1,11 @@
+//16-bit Adder/Subtractor based on 4-bit Carry-Look Ahead based adder
+
+CHIP Q2
+{
+	IN X[16], Y[16], S, u; //S determines if subtraction to be done, u determines if unsigned arithmetic to be done
+	OUT Z[16], OF;
+
+	PARTS:
+		Inputs(Y = Y, S = S, newY = newY); //Input Y modified to support subtraction
+		CLAA16(X = X, Y = newY, cin = S, u = u, Z = Z, OF = OF);
+}

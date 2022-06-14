@@ -1,0 +1,24 @@
+//Generates 16-bit form of product from partial products for unsigned integer multiplication
+
+CHIP MultiUS
+{
+	IN PP0[16], PP1[16], PP2[16], PP3[16], PP4[16], PP5[16], PP6[16], PP7[16];
+	OUT P[16];
+
+	PARTS:
+		Reducer32(S0 = PP0, S1 = PP1, S2 = PP2, S = S10, C = C10);
+		Reducer32(S0 = PP3, S1 = PP4, S2 = PP5, S = S11, C = C11); //Level 0 done
+
+		Reducer32(S0 = S10, S1 = C10, S2 = S11, S = S20, C = C20);
+		Reducer32(S0 = C11, S1 = PP6, S2 = PP7, S = S21, C = C21); //Level 1 done
+
+		Reducer32(S0 = S20, S1 = C20, S2 = S21, S = S30, C = C30); //Level 2 done
+
+		Reducer32(S0 = S30, S1 = C30, S2 = C21, S = S40, C = C40); //Level 3 done
+
+		Not(in = PP0[0], out = notPP);
+		And(a = PP0[0], b = notPP, out = set0);
+		Not(in = set0, out = set1);
+
+		HOCLAA16(X = S40, Y = C40, cin = set0, u = set1, Z = P, OF = temp); //16-bit product generated (carry bit is 0, unsigned is true, so inputs 0 and 1 respectively passed)
+}
