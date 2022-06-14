@@ -1,0 +1,19 @@
+CHIP HighPG
+{
+	IN a[4],b[4];
+	OUT P0,G0;
+	PARTS:
+	Xor(a=a[0],b=b[0],out=p0);		//p0
+	Xor(a=a[1],b=b[1],out=p1);		//p1
+	Xor(a=a[2],b=b[2],out=p2);		//p2
+	Xor(a=a[3],b=b[3],out=p3);		//p3
+	And(a=a[0],b=b[0],out=g0);		//g0
+	And(a=a[1],b=b[1],out=g1);		//g1
+	And(a=a[2],b=b[2],out=g2);		//g2
+	And(a=a[3],b=b[3],out=g3);		//g3
+	And4(a=p3,b=p2,c=p1,d=p0, out =P0);
+	And4(a=p3,b=p2,c=p1,d=g0,out=p3p2p1g0);
+	And3(a=p3,b=p2,c=g1,out=p3p2g1);
+	And(a=p3,b=g2,out=p3g2);
+	Or4(a=p3p2p1g0,b=p3p2g1,c=p3g2,d=g3,out=G0);
+}

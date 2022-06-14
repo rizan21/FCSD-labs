@@ -1,0 +1,16 @@
+/* Generating the mantissa of the product by using
+   a 8-bit Wallace tree multiplier which uses 
+   Summand Tree based multiplication
+   and then deciding the 7-bits of the mantissa using 
+   a MUX which uses the source code as pm[15] bit
+*/
+
+CHIP ZmantissaGen{
+IN x[8], y[8];
+OUT z[7], s;				//Also gives the pm[15] as output to be used in exponent generator
+
+PARTS:
+UnsignedWTM(x=x, y=y, z=pm);		// 8-bit WTM which gives a 16-bit product
+Mux(pm=pm, z=z, s=s);			// MUX initializer gives a 7-bit output
+}
+

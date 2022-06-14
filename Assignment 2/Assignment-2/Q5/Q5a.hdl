@@ -1,0 +1,19 @@
+/*This is a parity bit generator.
+This uses the XOR builtin gate. */
+
+CHIP Q5a {
+IN x7, x6, x5, x4, x3, x2, x1, x0;
+OUT p-bit;
+
+PARTS:
+Xor(a=x0, b=x1, out=out01);
+Xor(a=x2, b=x3, out=out02);
+Xor(a=x4, b=x5, out=out03);
+Xor(a=x6, b=x7, out=out04);
+
+Xor(a=out01, b=out02, out=out11);
+Xor(a=out03, b=out04, out=out12);
+
+Xor(a=out11, b=out12, out=p-bit);
+}
+

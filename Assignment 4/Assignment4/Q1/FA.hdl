@@ -1,0 +1,16 @@
+/* 
+	1-Bit Full Adder (FA)
+*/
+
+CHIP FA
+{
+	IN a,b,c;
+	OUT s,ca;
+	PARTS:
+	Xor(a=a,b=b,out=o1);		// a(+)b
+	Xor(a=o1,b=c,out=s);		// sum = a(+)b(+)c
+	Or(a=a,b=b,out=o2);		// a + b
+	And(a=o2,b=c,out=m1);		// (a + b)*c
+	And(a=a,b=b,out=m2);		// a*b
+	Or(a=m1,b=m2,out=ca);	// a*b + b*c + a*c
+}

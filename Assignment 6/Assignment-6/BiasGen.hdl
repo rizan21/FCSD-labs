@@ -1,0 +1,31 @@
+/*
+	Bias Generator circuit which generates 
+	9-bit 126 and 127 bit by bit
+*/
+
+CHIP BiasGen{
+IN one, zero;
+OUT out1[9], out2[9];
+
+PARTS:
+And(a=zero, b=zero, out=out1[8]);		//out1 is 9-bit 126
+And(a=zero, b=zero, out=out1[7]);
+Or(a=zero, b=one, out=out1[6]);
+Or(a=zero, b=one, out=out1[5]);
+Or(a=zero, b=one, out=out1[4]);
+Or(a=zero, b=one, out=out1[3]);
+Or(a=zero, b=one, out=out1[2]);
+Or(a=zero, b=one, out=out1[1]);
+And(a=zero, b=zero, out=out1[0]);
+
+And(a=zero, b=zero, out=out2[8]);		//out2 is 9-bit 127
+And(a=zero, b=zero, out=out2[7]);
+Or(a=zero, b=one, out=out2[6]);
+Or(a=zero, b=one, out=out2[5]);
+Or(a=zero, b=one, out=out2[4]);
+Or(a=zero, b=one, out=out2[3]);
+Or(a=zero, b=one, out=out2[2]);
+Or(a=zero, b=one, out=out2[1]);
+Or(a=zero, b=one, out=out2[0]);
+
+}

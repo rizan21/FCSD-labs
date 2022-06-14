@@ -1,0 +1,23 @@
+CHIP Inputs
+{
+	IN Y[16], S;
+	OUT newY[16]; //Input Y converted to 1's complement form if S = 1, else remains as is.
+
+	PARTS:
+		Xor(a = Y[0], b = S, out = newY[0]);
+		Xor(a = Y[1], b = S, out = newY[1]);
+		Xor(a = Y[2], b = S, out = newY[2]);
+		Xor(a = Y[3], b = S, out = newY[3]);
+		Xor(a = Y[4], b = S, out = newY[4]);
+		Xor(a = Y[5], b = S, out = newY[5]);
+		Xor(a = Y[6], b = S, out = newY[6]);
+		Xor(a = Y[7], b = S, out = newY[7]);
+		Xor(a = Y[8], b = S, out = newY[8]);
+		Xor(a = Y[9], b = S, out = newY[9]);
+		Xor(a = Y[10], b = S, out = newY[10]);
+		Xor(a = Y[11], b = S, out = newY[11]);
+		Xor(a = Y[12], b = S, out = newY[12]);
+		Xor(a = Y[13], b = S, out = newY[13]);
+		Xor(a = Y[14], b = S, out = newY[14]);
+		Xor(a = Y[15], b = S, out = newY[15]);
+}

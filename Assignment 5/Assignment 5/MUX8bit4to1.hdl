@@ -1,0 +1,63 @@
+//8-bit 4-to-1 line MUX
+
+CHIP MUX8bit4to1
+{
+	IN a[8], b[8], c[8], d[8], S[2];
+	OUT out[8];
+
+	PARTS:
+		Not(in = S[0], out = notS0);
+		Not(in = S[1], out = notS1);
+		And(a = notS1, b = notS0, out = m0);
+		And(a = notS1, b = S[0], out = m1);
+		And(a = S[1], b = notS0, out = m2);
+		And(a = S[1], b = S[0], out = m3); //Preparatory stage, minterms calculated, to use in calculation of result
+
+		And(a = m0, b = a[0], out = t00);
+		And(a = m1, b = b[0], out = t01);
+		And(a = m2, b = c[0], out = t02);
+		And(a = m3, b = d[0], out = t03);
+		Or4(a = t00, b = t01, c = t02, d = t03, out = out[0]);
+
+		And(a = m0, b = a[1], out = t10);
+		And(a = m1, b = b[1], out = t11);
+		And(a = m2, b = c[1], out = t12);
+		And(a = m3, b = d[1], out = t13);
+		Or4(a = t10, b = t11, c = t12, d = t13, out = out[1]);
+
+		And(a = m0, b = a[2], out = t20);
+		And(a = m1, b = b[2], out = t21);
+		And(a = m2, b = c[2], out = t22);
+		And(a = m3, b = d[2], out = t23);
+		Or4(a = t20, b = t21, c = t22, d = t23, out = out[2]);
+
+		And(a = m0, b = a[3], out = t30);
+		And(a = m1, b = b[3], out = t31);
+		And(a = m2, b = c[3], out = t32);
+		And(a = m3, b = d[3], out = t33);
+		Or4(a = t30, b = t31, c = t32, d = t33, out = out[3]);
+
+		And(a = m0, b = a[4], out = t40);
+		And(a = m1, b = b[4], out = t41);
+		And(a = m2, b = c[4], out = t42);
+		And(a = m3, b = d[4], out = t43);
+		Or4(a = t40, b = t41, c = t42, d = t43, out = out[4]);
+
+		And(a = m0, b = a[5], out = t50);
+		And(a = m1, b = b[5], out = t51);
+		And(a = m2, b = c[5], out = t52);
+		And(a = m3, b = d[5], out = t53);
+		Or4(a = t50, b = t51, c = t52, d = t53, out = out[5]);
+
+		And(a = m0, b = a[6], out = t60);
+		And(a = m1, b = b[6], out = t61);
+		And(a = m2, b = c[6], out = t62);
+		And(a = m3, b = d[6], out = t63);
+		Or4(a = t60, b = t61, c = t62, d = t63, out = out[6]);
+
+		And(a = m0, b = a[7], out = t70);
+		And(a = m1, b = b[7], out = t71);
+		And(a = m2, b = c[7], out = t72);
+		And(a = m3, b = d[7], out = t73);
+		Or4(a = t70, b = t71, c = t72, d = t73, out = out[7]);
+}

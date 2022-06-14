@@ -1,0 +1,20 @@
+CHIP HOCLAA16
+{
+	IN X[16], Y[16], cin, u;
+	OUT Z[16], OF;
+
+	PARTS:
+		HOCLA4(X = X[0..3], Y = Y[0..3], cin = cin, PH = PH0, GH = GH0, S = Z[0..3]);
+		And(a = PH0, b = cin, out = t0);
+		Or(a = t0, b = GH0, out = c4);
+
+		HOCLA4(X = X[4..7], Y = Y[4..7], cin = c4, PH = PH1, GH = GH1, S = Z[4..7]);
+		And(a = PH1, b = c4, out = t1);
+		Or(a = t1, b = GH1, out = c8);
+
+		HOCLA4(X = X[8..11], Y = Y[8..11], cin = c8, PH = PH2, GH = GH2, S = Z[8..11]);
+		And(a = PH2, b = c8, out = t2);
+		Or(a = t2, b = GH2, out = c12); //These are 4-bit CLA based adders which also generate higher order P&G terms, which are then used to produce next carry bit
+
+		CLA4OF(X = X[12..15], Y = Y[12..15], cin = c12, u = u, s = cin, S = Z[12..15], OF = OF); //Regular 4-bit CLA based adder (no higher order since no next stage) which also checks for overflow
+}

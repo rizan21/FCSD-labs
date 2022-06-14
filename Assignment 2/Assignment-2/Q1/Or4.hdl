@@ -1,0 +1,11 @@
+/* This HDL file provides a 
+4-input OR function */
+CHIP Or4 {
+IN a, b, c, d;
+OUT out;
+
+PARTS:
+Or(a=a, b=b, out=out1);
+Or(a=c, b=d, out=out2);
+Or(a=out1, b=out2, out=out);
+}

@@ -1,0 +1,10 @@
+CHIP Nand9
+{
+	IN a, b, c, d, e, f, g, h, i;
+	OUT out;
+
+	PARTS:
+		And5(a = a, b = b, c = c, d = d, e = e, out = t1);
+		And5(a = t1, b = f, c = g, d = h, e = i, out = notout);
+		Not(in = notout, out = out);
+}

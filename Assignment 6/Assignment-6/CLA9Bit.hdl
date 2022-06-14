@@ -1,0 +1,22 @@
+/*
+	9-bit CLA	
+*/
+
+CHIP CLA9Bit {
+IN x[9], y[9], c0, sign;
+OUT out[9], of;
+
+PARTS:
+CLA4Bit(x=x[0..3], y=y[0..3], ci=c0, out=out[0..3], cf=c4);
+CLA4Bit(x=x[4..7], y=y[4..7], ci=c4, out=out[4..7], cf=c8);
+FA(a=x[8], b=y[8], c=c8, s=out[8], ca=c9);
+
+Not(in=sign, out=unsign);
+
+Xor(a=c8, b=c9, out=of1);
+And(a=of1, b=sign, out=out1);
+
+And(a=c9, b=unsign, out=out2);
+
+Or(a=out1, b=out2, out=of);
+}

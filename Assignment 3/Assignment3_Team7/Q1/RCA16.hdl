@@ -1,0 +1,29 @@
+CHIP RCA16
+{
+	IN X[16], Y[16], c0, u;
+	OUT Z[16], OF;
+
+	PARTS:
+		FA1(x = X[0], y = Y[0], cin = c0, s = Z[0], cout = c1); //c0 is the subtractor bit, so if it is 1, then Y will effectively be 2's complement form. Else, no effect
+		FA1(x = X[1], y = Y[1], cin = c1, s = Z[1], cout = c2);
+		FA1(x = X[2], y = Y[2], cin = c2, s = Z[2], cout = c3);
+		FA1(x = X[3], y = Y[3], cin = c3, s = Z[3], cout = c4);
+		FA1(x = X[4], y = Y[4], cin = c4, s = Z[4], cout = c5);
+		FA1(x = X[5], y = Y[5], cin = c5, s = Z[5], cout = c6);
+		FA1(x = X[6], y = Y[6], cin = c6, s = Z[6], cout = c7);
+		FA1(x = X[7], y = Y[7], cin = c7, s = Z[7], cout = c8);
+		FA1(x = X[8], y = Y[8], cin = c8, s = Z[8], cout = c9);
+		FA1(x = X[9], y = Y[9], cin = c9, s = Z[9], cout = c10);
+		FA1(x = X[10], y = Y[10], cin = c10, s = Z[10], cout = c11);
+		FA1(x = X[11], y = Y[11], cin = c11, s = Z[11], cout = c12);
+		FA1(x = X[12], y = Y[12], cin = c12, s = Z[12], cout = c13);
+		FA1(x = X[13], y = Y[13], cin = c13, s = Z[13], cout = c14);
+		FA1(x = X[14], y = Y[14], cin = c14, s = Z[14], cout = c15);
+		FA1(x = X[15], y = Y[15], cin = c15, s = Z[15], cout = c16);
+		Xor(a = c15, b = c16, out = OFs); //Overflow condition for signed arithmetic
+		Xor(a = c0, b = c16, out = OFu); //Overflow for unsigned: for addition, c16 is 1, for subtraction c16 is 0, or effectively, c16 is not c0 (subtractor bit S), hence, xor
+		And(a = u, b = OFu, out = t1);
+		Not(in = u, out = notu);
+		And(a = notu, b = OFs, out = t2);
+		Or(a = t1, b = t2, out = OF); //Signed overflow triggered if u = 0 and unsigned if u = 1
+}

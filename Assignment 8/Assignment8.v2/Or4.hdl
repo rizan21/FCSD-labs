@@ -1,0 +1,8 @@
+CHIP Or4 {
+
+    IN a[4];
+    OUT out;
+    PARTS:
+    Or3(a=a[0..2],out=o0);
+    Or(a=o0, b=a[3], out=out);
+}

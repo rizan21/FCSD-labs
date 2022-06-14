@@ -1,0 +1,21 @@
+/*
+	minSOP is W'X'Z + YZ + WZ' + XZ' which can be rearranged as
+		Z'( W + X ) + Z( W'X' + Y ) 
+*/
+
+
+
+CHIP Q1a {
+	IN W,X,Y,Z;
+	OUT out;
+	PARTS:
+	Not(in=Z, out=notZ);			// Z'
+	Not(in=X, out=notX);			// X'
+	Not(in=W, out=notW);			// W'
+	Or(a=W, b=X, out=o1);			// W+X
+	And(a=notZ, b=o1, out=p1);		// Z'(W+X)
+	And(a=notW, b=notX, out=m1);		// W'X'
+	Or(a=m1, b=Y, out=o2);			// W'X'+Y
+	And(a=Z, b=o2, out=p2);			// Z( W'X' + Y )
+	Or(a=p1, b=p2, out=out);		// Z'(W+X) + Z(W'X'+Y)
+}

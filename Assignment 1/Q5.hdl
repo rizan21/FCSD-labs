@@ -1,0 +1,28 @@
+/*
+	3-to-8 bit decoder
+*/
+
+CHIP Q5 {
+	IN Y2,Y1,Y0;
+	OUT X0,X1,X2,X3,X4,X5,X6,X7;
+	PARTS:
+	Not(in=Y2, out=notY2);			// Y2'
+	Not(in=Y1, out=notY1);			// Y1'
+	Not(in=Y0, out=notY0);			// Y0'
+	And(a=notY2, b=notY1, out=p0);		// Y2'Y1'
+	And(a=p0, b=notY0, out=X0);		// Y2'Y1'Y0'		(X0)
+	And(a=notY2, b=notY1, out=p1);		// Y2'Y1'
+	And(a=p1, b=Y0, out=X1);		// Y2'Y1'Y0		(X1)
+	And(a=notY2, b=Y1, out=p2);		// Y2'Y1
+	And(a=p2, b=notY0, out=X2);		// Y2'Y1Y0'		(X2)
+	And(a=notY2, b=Y1, out=p3);		// Y2'Y1
+	And(a=p3, b=Y0, out=X3);		// Y2'Y1Y0		(X3)
+	And(a=Y2, b=notY1, out=p4);		// Y2Y1'
+	And(a=p4, b=notY0, out=X4);		// Y2Y1'Y0'		(X4)
+	And(a=Y2, b=notY1, out=p5);		// Y2Y1'
+	And(a=p5, b=Y0, out=X5);		// Y2Y1'Y0		(X5)
+	And(a=Y2, b=Y1, out=p6);		// Y2Y1
+	And(a=p6, b=notY0, out=X6);		// Y2Y1Y0'		(X6)
+	And(a=Y2, b=Y1, out=p7);		// Y2Y1
+	And(a=p7, b=Y0, out=X7);		// Y2Y1Y0		(X7)
+}
