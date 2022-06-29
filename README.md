@@ -11,4 +11,4 @@
 7. Implement Hack ALU
 8. Implement Hack CPU and Hack Computer
 
-All assignments were team assignments and were done by <a href="https://github.com/bersilin-robert1609">Bersilin C</a>, <a href="https://github.com/rizan21">Rizan</a>, and myself.
+All assignments were team assignments and were done by <a href="https://github.com/rizan21">Rizan</a>, <a href="https://github.com/Bala-A87">Balakrishna</a> and <a href="https://github.com/bersilin-robert1609">Bersilin C</a>.
